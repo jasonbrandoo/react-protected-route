@@ -78,8 +78,8 @@ const Register = ({ classes, history }) => {
       history.push('/');
       axios
         .post('http://localhost:5000/user/register', User)
-        .then((res) => {
-          console.log(res.data);
+        .then(({ data }) => {
+          localStorage.setItem('token', data.token);
         })
         .catch((err) => {
           console.log(err);
@@ -90,10 +90,14 @@ const Register = ({ classes, history }) => {
   return (
     <React.Fragment>
       <Dialog open={open}>
-        <DialogTitle>Tes</DialogTitle>
+        <DialogTitle>Warning</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, perspiciatis.
+            Your password
+            {' '}
+            {"didn't"}
+            {' '}
+            match
           </DialogContentText>
         </DialogContent>
         <DialogActions>
