@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import {
   withStyles,
   Paper,
@@ -9,7 +9,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import AuthContext from '../../context/AuthContext';
+import axios from 'axios';
+import {
+  reducer, initialState, USER_LOADED, USER_LOADING,
+} from '../../reducers/authReducer';
 
 const style = theme => ({
   paper: {
@@ -37,7 +40,10 @@ const style = theme => ({
 const Login = ({ classes }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const context = useContext(AuthContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  useEffect(() => {
+    console.log('state', state);
+  });
 
   const handleUsername = (e) => {
     setName(e.target.value);
@@ -49,10 +55,19 @@ const Login = ({ classes }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    context.isAuth(name, password);
-    console.log('Name', name);
-    console.log('Password', password);
+    dispatch({ type: USER_LOADING });
+    axios
+      .post('http://localhost:5000/user/login', {
+        username: name,
+        password,
+      })
+      .then(({ data }) => {
+        dispatch({ type: USER_LOADED, payload: data });
+        console.log('data', data);
+      })
+      .catch(err => console.log(err));
   };
+
   return (
     <Paper className={classes.paper}>
       <form className={classes.form} onSubmit={e => handleSubmit(e)}>
@@ -63,7 +78,7 @@ const Login = ({ classes }) => {
         </FormControl>
         <FormControl required margin="normal" fullWidth>
           <InputLabel htmlFor="password">Password</InputLabel>
-          <Input type="text" name="password" onChange={e => handlePassword(e)} />
+          <Input type="password" name="password" onChange={e => handlePassword(e)} />
         </FormControl>
         <Button
           type="submit"

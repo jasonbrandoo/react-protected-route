@@ -18,7 +18,10 @@ const Public = ({ classes }) => (
     </Typography>
     <Divider className={classes.divider} />
     <Typography paragraph>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt necessitatibus modi ab, rerum odio esse vero saepe optio. Adipisci voluptatum tempore numquam consectetur voluptatibus iusto. Eius, nihil! Eaque cupiditate at quae alias blanditiis rem laborum laboriosam natus, asperiores quibusdam a beatae iste dolore, atque enim ipsum aut sapiente doloribus. Eos!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt necessitatibus modi ab,
+      rerum odio esse vero saepe optio. Adipisci voluptatum tempore numquam consectetur voluptatibus
+      iusto. Eius, nihil! Eaque cupiditate at quae alias blanditiis rem laborum laboriosam natus,
+      asperiores quibusdam a beatae iste dolore, atque enim ipsum aut sapiente doloribus. Eos!
     </Typography>
   </React.Fragment>
 );
