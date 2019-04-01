@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useContext } from 'react';
 import {
   withStyles,
   Paper,
@@ -6,13 +6,18 @@ import {
   InputLabel,
   Input,
   Button,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
-  reducer, initialState, USER_LOADED, USER_LOADING,
+  reducer,
+  initialState,
+  USER_LOADING,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS
 } from '../../reducers/authReducer';
+import { Context } from '../../context/AuthContext';
 
 const style = theme => ({
   paper: {
@@ -22,50 +27,54 @@ const style = theme => ({
     [theme.breakpoints.up('md')]: {
       width: 400,
       marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+      marginRight: 'auto'
+    }
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing.unit * 8,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 3
   },
   button: {
-    marginTop: theme.spacing.unit * 2,
-  },
+    marginTop: theme.spacing.unit * 2
+  }
 });
 
-const Login = ({ classes }) => {
-  const [name, setName] = useState('');
+const Login = ({ classes, history }) => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const context = useContext(Context);
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
-    console.log('state', state);
-  });
+    console.log('context', context);
+  }, [state]);
 
-  const handleUsername = (e) => {
-    setName(e.target.value);
+  const handleUsername = e => {
+    setUsername(e.target.value);
   };
 
-  const handlePassword = (e) => {
+  const handlePassword = e => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch({ type: USER_LOADING });
     axios
       .post('http://localhost:5000/user/login', {
-        username: name,
-        password,
+        username,
+        password
       })
       .then(({ data }) => {
-        dispatch({ type: USER_LOADED, payload: data });
-        console.log('data', data);
+        dispatch({ type: LOGIN_SUCCESS, payload: data });
+        window.location.href = '/';
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({ type: LOGIN_FAIL });
+        console.log(err);
+      });
   };
 
   return (
@@ -74,11 +83,19 @@ const Login = ({ classes }) => {
         <Typography variant="h4">Login</Typography>
         <FormControl required margin="normal" fullWidth>
           <InputLabel htmlFor="username">Username</InputLabel>
-          <Input type="text" name="username" onChange={e => handleUsername(e)} />
+          <Input
+            type="text"
+            name="username"
+            onChange={e => handleUsername(e)}
+          />
         </FormControl>
         <FormControl required margin="normal" fullWidth>
           <InputLabel htmlFor="password">Password</InputLabel>
-          <Input type="password" name="password" onChange={e => handlePassword(e)} />
+          <Input
+            type="password"
+            name="password"
+            onChange={e => handlePassword(e)}
+          />
         </FormControl>
         <Button
           type="submit"
@@ -98,8 +115,8 @@ Login.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
     form: PropTypes.string,
-    button: PropTypes.string,
-  }).isRequired,
+    button: PropTypes.string
+  }).isRequired
 };
 
 export default withStyles(style)(Login);

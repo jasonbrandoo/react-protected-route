@@ -12,7 +12,7 @@ export const initialState = {
   isLoggedIn: null,
   isLoading: false,
   token: localStorage.getItem('token'),
-  user: null,
+  user: null
 };
 
 export const reducer = (state, action) => {
@@ -20,14 +20,34 @@ export const reducer = (state, action) => {
     case USER_LOADING:
       return {
         ...state,
-        isLoading: true,
+        isLoading: true
       };
     case USER_LOADED:
       return {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        user: action.payload,
+        user: action.payload
+      };
+    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+        token: localStorage.setItem('token', action.payload.token)
+      };
+    case AUTH_FAIL:
+    case REGISTER_FAIL:
+    case LOGIN_FAIL:
+    case LOGOUT_SUCCESS:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        isLoggedIn: false,
+        isLoading: false,
+        token: null,
+        user: null
       };
     default:
       return state;

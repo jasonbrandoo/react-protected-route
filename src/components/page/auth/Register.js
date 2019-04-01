@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
@@ -13,8 +13,14 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from '@material-ui/core';
+import {
+  reducer,
+  initialState,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL
+} from '../../reducers/authReducer';
 
 const style = theme => ({
   paper: {
@@ -24,19 +30,19 @@ const style = theme => ({
     [theme.breakpoints.up('md')]: {
       width: 400,
       marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+      marginRight: 'auto'
+    }
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing.unit * 8,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 3
   },
   button: {
-    marginTop: theme.spacing.unit * 2,
-  },
+    marginTop: theme.spacing.unit * 2
+  }
 });
 
 const Register = ({ classes, history }) => {
@@ -45,6 +51,7 @@ const Register = ({ classes, history }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [open, setOpen] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,36 +59,38 @@ const Register = ({ classes, history }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleFullname = (e) => {
+  const handleFullname = e => {
     setFullname(e.target.value);
   };
-  const handleUsername = (e) => {
+  const handleUsername = e => {
     setUsername(e.target.value);
   };
-  const handlePassword = (e) => {
+  const handlePassword = e => {
     setPassword(e.target.value);
   };
-  const handleConfirmPassword = (e) => {
+  const handleConfirmPassword = e => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const User = {
       fullname,
       username,
-      password,
+      password
     };
     if (password !== confirmPassword) {
       handleOpen();
     } else {
-      history.push('/');
       axios
         .post('http://localhost:5000/user/register', User)
         .then(({ data }) => {
-          localStorage.setItem('token', data.token);
+          dispatch({ type: REGISTER_SUCCESS, payload: data });
+          history.push('/');
+          console.log(data);
         })
-        .catch((err) => {
+        .catch(err => {
+          dispatch({ type: REGISTER_FAIL });
           console.log(err);
         });
     }
@@ -92,13 +101,7 @@ const Register = ({ classes, history }) => {
       <Dialog open={open}>
         <DialogTitle>Warning</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Your password
-            {' '}
-            {"didn't"}
-            {' '}
-            match
-          </DialogContentText>
+          <DialogContentText>Your password not match</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={handleClose}>
@@ -113,15 +116,27 @@ const Register = ({ classes, history }) => {
           </Typography>
           <FormControl required margin="normal" fullWidth>
             <InputLabel htmlFor="name">Name</InputLabel>
-            <Input type="text" name="fullname" onChange={e => handleFullname(e)} />
+            <Input
+              type="text"
+              name="fullname"
+              onChange={e => handleFullname(e)}
+            />
           </FormControl>
           <FormControl required margin="normal" fullWidth>
             <InputLabel htmlFor="username">Username</InputLabel>
-            <Input type="text" name="username" onChange={e => handleUsername(e)} />
+            <Input
+              type="text"
+              name="username"
+              onChange={e => handleUsername(e)}
+            />
           </FormControl>
           <FormControl required margin="normal" fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input type="password" name="initPassword" onChange={e => handlePassword(e)} />
+            <Input
+              type="password"
+              name="initPassword"
+              onChange={e => handlePassword(e)}
+            />
           </FormControl>
           <FormControl required margin="normal" fullWidth>
             <InputLabel htmlFor="confirm">Confirm Password</InputLabel>
@@ -150,11 +165,11 @@ Register.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
     form: PropTypes.string,
-    button: PropTypes.string,
+    button: PropTypes.string
   }).isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+    push: PropTypes.func
+  }).isRequired
 };
 
 export default withStyles(style)(Register);
