@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from 'react';
 import {
   withStyles,
   Paper,
@@ -6,50 +6,44 @@ import {
   InputLabel,
   Input,
   Button,
-  Typography
-} from "@material-ui/core";
-import PropTypes from "prop-types";
-import axios from "axios";
+  Typography,
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import {
   USER_LOADING,
   LOGIN_FAIL,
-  LOGIN_SUCCESS
-} from "../../../reducers/authReducer";
-import { Context } from "../../../context/AuthContext";
+  LOGIN_SUCCESS,
+} from '../../../reducers/authReducer';
+import { Context } from '../../../context/AuthContext';
 
 const style = theme => ({
   paper: {
-    width: "auto",
+    width: 'auto',
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       width: 400,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
   },
   form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: theme.spacing.unit * 8,
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
   },
   button: {
-    marginTop: theme.spacing.unit * 2
-  }
+    marginTop: theme.spacing.unit * 2,
+  },
 });
 
 const Login = ({ classes, history }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [state, dispatch] = useContext(Context);
-  useEffect(
-    () => {
-      console.log("context", state);
-    },
-    [state]
-  );
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { dispatch } = useContext(Context);
 
   const handleUsername = e => {
     setUsername(e.target.value);
@@ -63,13 +57,15 @@ const Login = ({ classes, history }) => {
     e.preventDefault();
     dispatch({ type: USER_LOADING });
     axios
-      .post("http://localhost:5000/user/login", {
+      .post('http://localhost:5000/user/login', {
         username,
-        password
+        password,
       })
       .then(({ data }) => {
         dispatch({ type: LOGIN_SUCCESS, payload: data });
-        window.location.href = "/";
+        // window.location.href = '/';
+        history.createHref('/');
+        console.log(data);
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAIL });
@@ -115,8 +111,8 @@ Login.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
     form: PropTypes.string,
-    button: PropTypes.string
-  }).isRequired
+    button: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(style)(Login);

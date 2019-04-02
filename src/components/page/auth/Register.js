@@ -1,6 +1,6 @@
-import React, { useState, useReducer } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
+import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import {
   FormControl,
   Input,
@@ -13,45 +13,41 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
-} from "@material-ui/core";
-import {
-  reducer,
-  initialState,
-  REGISTER_SUCCESS,
-  REGISTER_FAIL
-} from "../../../reducers/authReducer";
+  DialogActions,
+} from '@material-ui/core';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from '../../../reducers/authReducer';
+import { Context } from '../../../context/AuthContext';
 
 const style = theme => ({
   paper: {
-    width: "auto",
+    width: 'auto',
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       width: 400,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
   },
   form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: theme.spacing.unit * 8,
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
   },
   button: {
-    marginTop: theme.spacing.unit * 2
-  }
+    marginTop: theme.spacing.unit * 2,
+  },
 });
 
-const Register = ({ classes, history }) => {
-  const [fullname, setFullname] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const Register = ({ classes }) => {
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [open, setOpen] = useState(false);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { dispatch } = useContext(Context);
 
   const handleOpen = () => {
     setOpen(true);
@@ -77,16 +73,16 @@ const Register = ({ classes, history }) => {
     const User = {
       fullname,
       username,
-      password
+      password,
     };
     if (password !== confirmPassword) {
       handleOpen();
     } else {
       axios
-        .post("http://localhost:5000/user/register", User)
+        .post('http://localhost:5000/user/register', User)
         .then(({ data }) => {
           dispatch({ type: REGISTER_SUCCESS, payload: data });
-          history.push("/");
+          // history.push('/');
           console.log(data);
         })
         .catch(err => {
@@ -165,11 +161,11 @@ Register.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
     form: PropTypes.string,
-    button: PropTypes.string
+    button: PropTypes.string,
   }).isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func
-  }).isRequired
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default withStyles(style)(Register);

@@ -1,27 +1,25 @@
-import React, { useContext, useEffect } from "react";
-import { Typography, withStyles, Divider } from "@material-ui/core";
-import { Context } from "../../context/AuthContext";
+import React, { useContext } from 'react';
+import { Typography, withStyles, Divider } from '@material-ui/core';
+import { Context } from '../../context/AuthContext';
 
 const style = () => ({
   root: {
-    marginTop: 10
+    marginTop: 10,
   },
   divider: {
     marginTop: 10,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
 const Public = ({ classes }) => {
-  const [state, dispatch] = useContext(Context);
-  useEffect(() => {
-    console.log("context", state);
-  });
-
+  const { state } = useContext(Context);
+  console.log(classes);
   return (
     <React.Fragment>
       <Typography variant="h4" className={classes.root}>
-        Public page {state.isLoggedIn === true ? "true" : "false"}
+        Public page
+        {state.isLoggedIn === true ? 'true' : 'false'}
       </Typography>
       <Divider className={classes.divider} />
       <Typography paragraph>

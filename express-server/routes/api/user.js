@@ -26,15 +26,20 @@ router.post('/register', (req, res) => {
     username,
     password,
   };
-  jwt.sign({ name: User.username }, jwtkey, { expiresIn: '30s' }, (err, token) => {
-    if (err) {
-      res.status(500).json(err);
-    }
-    res.status(200).json({
-      token,
-      User,
-    });
-  });
+  jwt.sign(
+    { name: User.username },
+    jwtkey,
+    { expiresIn: '30s' },
+    (err, token) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+      res.status(200).json({
+        token,
+        User,
+      });
+    },
+  );
 });
 
 router.post('/login', (req, res) => {
