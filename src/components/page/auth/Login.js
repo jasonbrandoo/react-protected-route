@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import {
   withStyles,
   Paper,
@@ -7,33 +7,31 @@ import {
   Input,
   Button,
   Typography
-} from '@material-ui/core';
-import PropTypes from 'prop-types';
-import axios from 'axios';
+} from "@material-ui/core";
+import PropTypes from "prop-types";
+import axios from "axios";
 import {
-  reducer,
-  initialState,
   USER_LOADING,
   LOGIN_FAIL,
   LOGIN_SUCCESS
-} from '../../reducers/authReducer';
-import { Context } from '../../context/AuthContext';
+} from "../../../reducers/authReducer";
+import { Context } from "../../../context/AuthContext";
 
 const style = theme => ({
   paper: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      marginLeft: "auto",
+      marginRight: "auto"
     }
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     marginTop: theme.spacing.unit * 8,
     padding: theme.spacing.unit * 3
   },
@@ -43,13 +41,15 @@ const style = theme => ({
 });
 
 const Login = ({ classes, history }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const context = useContext(Context);
-  const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(() => {
-    console.log('context', context);
-  }, [state]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [state, dispatch] = useContext(Context);
+  useEffect(
+    () => {
+      console.log("context", state);
+    },
+    [state]
+  );
 
   const handleUsername = e => {
     setUsername(e.target.value);
@@ -63,13 +63,13 @@ const Login = ({ classes, history }) => {
     e.preventDefault();
     dispatch({ type: USER_LOADING });
     axios
-      .post('http://localhost:5000/user/login', {
+      .post("http://localhost:5000/user/login", {
         username,
         password
       })
       .then(({ data }) => {
         dispatch({ type: LOGIN_SUCCESS, payload: data });
-        window.location.href = '/';
+        window.location.href = "/";
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAIL });

@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { Typography, withStyles, Divider } from '@material-ui/core';
-import { Context } from '../context/AuthContext';
+import React, { useContext, useEffect } from "react";
+import { Typography, withStyles, Divider } from "@material-ui/core";
+import { Context } from "../../context/AuthContext";
 
 const style = () => ({
   root: {
@@ -13,15 +13,15 @@ const style = () => ({
 });
 
 const Public = ({ classes }) => {
-  const context = useContext(Context);
+  const [state, dispatch] = useContext(Context);
   useEffect(() => {
-    console.log('context', context);
+    console.log("context", state);
   });
 
   return (
     <React.Fragment>
       <Typography variant="h4" className={classes.root}>
-        Public page         {context.isLoggedIn === true ? 'ture' : 'false'}
+        Public page {state.isLoggedIn === true ? "true" : "false"}
       </Typography>
       <Divider className={classes.divider} />
       <Typography paragraph>
