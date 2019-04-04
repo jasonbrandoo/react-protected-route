@@ -57,7 +57,10 @@ const Login = ({ classes, history }) => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch({ type: USER_LOADING });
-    dispatch({ type: CHECK_PASSWORD, payload: password });
+    const { password: localPassword } = JSON.parse(localStorage('user'));
+    if (localPassword !== password) {
+      dispatch({ type: CHECK_PASSWORD, payload: password });
+    }
     axios
       .post('http://localhost:5000/user/login', {
         username,
