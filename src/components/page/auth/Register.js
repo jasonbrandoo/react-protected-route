@@ -82,8 +82,7 @@ const Register = ({ classes }) => {
         .post('http://localhost:5000/user/register', User)
         .then(({ data }) => {
           dispatch({ type: REGISTER_SUCCESS, payload: data });
-          // history.push('/');
-          console.log(data);
+          window.location.href = '/';
         })
         .catch(err => {
           dispatch({ type: REGISTER_FAIL });

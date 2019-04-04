@@ -1,5 +1,6 @@
 export const USER_LOADING = 'USER_LOADING';
 export const USER_LOADED = 'USER_LOADED';
+export const CHECK_PASSWORD = 'CHECK_PASSWORD';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -11,7 +12,8 @@ export const initialState = {
   isLoggedIn: null,
   isLoading: false,
   token: localStorage.getItem('token'),
-  user: null,
+  user: localStorage.getItem('user'),
+  error: null,
 };
 
 export const reducer = (state, action) => {
@@ -26,9 +28,34 @@ export const reducer = (state, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        user: action.payload,
       };
     case REGISTER_SUCCESS:
+      {
+        const user = {
+          fullname: action.payload.user.fullname,
+          username: action.payload.user.username,
+          password: action.payload.user.username,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', action.payload.token);
+      }
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+      };
+    case CHECK_PASSWORD:
+      {
+        const local = localStorage.getItem('user');
+        const { password } = JSON.parse(local);
+        if (password !== action.payload) {
+          return {
+            ...state,
+            error: 'Password not match',
+          };
+        }
+      }
+      break;
     case LOGIN_SUCCESS:
       localStorage.setItem('token', action.payload.token);
       return {
@@ -41,6 +68,7 @@ export const reducer = (state, action) => {
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       return {
         ...state,
         isLoggedIn: false,

@@ -14,6 +14,7 @@ import {
   USER_LOADING,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  CHECK_PASSWORD,
 } from '../../../reducers/authReducer';
 import { Context } from '../../../context/AuthContext';
 
@@ -56,6 +57,7 @@ const Login = ({ classes, history }) => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch({ type: USER_LOADING });
+    dispatch({ type: CHECK_PASSWORD, payload: password });
     axios
       .post('http://localhost:5000/user/login', {
         username,
@@ -63,8 +65,7 @@ const Login = ({ classes, history }) => {
       })
       .then(({ data }) => {
         dispatch({ type: LOGIN_SUCCESS, payload: data });
-        // window.location.href = '/';
-        history.createHref('/');
+        window.location.href = '/';
         console.log(data);
       })
       .catch(err => {

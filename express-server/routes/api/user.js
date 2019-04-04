@@ -8,6 +8,7 @@ const checkAuth = require('../../middlewares/auth');
 
 router.get('/auth', checkAuth, (req, res) => {
   const { name } = req.user;
+  console.log(req.user);
   res.json({
     message: 'ok',
     name,
@@ -21,13 +22,13 @@ router.post('/register', (req, res) => {
       message: 'Please fill all input fields',
     });
   }
-  const User = {
+  const user = {
     fullname,
     username,
     password,
   };
   jwt.sign(
-    { name: User.username },
+    { name: user.username },
     jwtkey,
     { expiresIn: '30s' },
     (err, token) => {
@@ -36,7 +37,7 @@ router.post('/register', (req, res) => {
       }
       res.status(200).json({
         token,
-        User,
+        user,
       });
     },
   );

@@ -14,7 +14,7 @@ const style = () => ({
 
 const Public = ({ classes }) => {
   const { state } = useContext(Context);
-  console.log(classes);
+  console.log(state);
   return (
     <React.Fragment>
       <Typography variant="h4" className={classes.root}>
