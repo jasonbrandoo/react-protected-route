@@ -1,13 +1,13 @@
 import React from 'react';
 import AuthContext from '../context/AuthContext';
 
-const Home = (props) => {
+const Home = props => {
   console.log(props);
   return (
     <AuthContext.Consumer>
       {value => (
         <h1>
-Heelo
+          Heelo
           {value.auth}
         </h1>
       )}

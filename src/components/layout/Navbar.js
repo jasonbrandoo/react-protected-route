@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import {
-  withStyles, AppBar, Toolbar, Drawer, Hidden, IconButton, Divider,
+  withStyles,
+  AppBar,
+  Toolbar,
+  Drawer,
+  Hidden,
+  IconButton,
+  Divider,
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
+import PropTypes from 'prop-types';
 import NavLink from './NavLink';
 
 const style = theme => ({
@@ -47,7 +54,11 @@ const Navbar = ({ classes, children }) => {
     <div className={classes.root}>
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar>
-          <IconButton color="inherit" onClick={handleDrawerToggle} className={classes.menuButton}>
+          <IconButton
+            color="inherit"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
             <Menu />
           </IconButton>
           <NavLink />
@@ -55,13 +66,24 @@ const Navbar = ({ classes, children }) => {
       </AppBar>
       <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
-          <Drawer variant="temporary" anchor="left" open={open} onClose={handleDrawerToggle} classes={{ paper: classes.drawerPaper }}>
+          <Drawer
+            variant="temporary"
+            anchor="left"
+            open={open}
+            onClose={handleDrawerToggle}
+            classes={{ paper: classes.drawerPaper }}
+          >
             <div className={classes.toolbar} />
             <Divider />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
-          <Drawer variant="permanent" anchor="left" open classes={{ paper: classes.drawerPaper }}>
+          <Drawer
+            variant="permanent"
+            anchor="left"
+            open
+            classes={{ paper: classes.drawerPaper }}
+          >
             <div className={classes.toolbar} />
             <Divider />
           </Drawer>
@@ -73,6 +95,17 @@ const Navbar = ({ classes, children }) => {
       </div>
     </div>
   );
+};
+
+Navbar.propTypes = {
+  classes: PropTypes.shape({
+    root: PropTypes.string,
+    drawer: PropTypes.string,
+    drawerPaper: PropTypes.string,
+    appBar: PropTypes.string,
+    toolbar: PropTypes.string,
+    menuButton: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(style)(Navbar);

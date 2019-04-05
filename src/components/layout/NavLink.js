@@ -22,7 +22,12 @@ const NavLink = ({ classes }) => (
     >
       Login
     </Button>
-    <Button to="/register" component={RouterLink} color="inherit" variant="text">
+    <Button
+      to="/register"
+      component={RouterLink}
+      color="inherit"
+      variant="text"
+    >
       Register
     </Button>
   </React.Fragment>
