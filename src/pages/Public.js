@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Typography, withStyles, Divider } from '@material-ui/core';
-import { Context } from '../../context/AuthContext';
+import PropTypes from 'prop-types';
+import { Context } from '../context/AuthContext';
 
 const style = () => ({
   root: {
@@ -32,6 +33,13 @@ const Public = ({ classes }) => {
       </Typography>
     </React.Fragment>
   );
+};
+
+Public.propTypes = {
+  classes: PropTypes.shape({
+    root: PropTypes.string,
+    divider: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(style)(Public);

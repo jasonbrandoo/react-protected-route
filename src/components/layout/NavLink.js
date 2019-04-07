@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, withStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const style = () => ({
   left: {
@@ -32,5 +33,11 @@ const NavLink = ({ classes }) => (
     </Button>
   </React.Fragment>
 );
+
+NavLink.propTypes = {
+  classes: PropTypes.shape({
+    left: PropTypes.string,
+  }).isRequired,
+};
 
 export default withStyles(style)(NavLink);
