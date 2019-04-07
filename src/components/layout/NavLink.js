@@ -2,7 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, withStyles } from '@material-ui/core';
 
-const style = theme => ({
+const style = () => ({
   left: {
     marginLeft: 'auto',
   },
