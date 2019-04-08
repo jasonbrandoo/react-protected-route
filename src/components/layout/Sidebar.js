@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles, Drawer, Hidden, Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import SidebarLink from './SidebarLink';
 
 const style = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -29,6 +30,7 @@ const Sidebar = ({ classes, open, drawer }) => {
           >
             <div className={classes.toolbar} />
             <Divider />
+            <SidebarLink />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -40,6 +42,7 @@ const Sidebar = ({ classes, open, drawer }) => {
           >
             <div className={classes.toolbar} />
             <Divider />
+            <SidebarLink />
           </Drawer>
         </Hidden>
       </nav>
