@@ -1,25 +1,33 @@
-import React from 'react';
+import React from "react";
 import {
   withStyles,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
-  Divider,
-} from '@material-ui/core';
-import { Link } from 'react-router-dom';
+  Divider
+} from "@material-ui/core";
+import { Dashboard, List as ListIcon } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const style = () => {
   return {
-    fontSize: 50,
+    fontSize: 50
   };
 };
 
-const SidebarLink = ({ classes }) => {
-  console.log(classes);
+const SidebarLink = ({ classes, drawer }) => {
+  
+  const renderLink = (props) => (
+    <Link to="/login" {...props} />
+  );
   return (
     <List component="nav">
-      <ListItem component={Link} to="/login">
-        <ListItemText primary="tes" />
+      <ListItem button component={renderLink} onClick={() => drawer()}>
+      <ListItemIcon>
+        <Dashboard />
+      </ListItemIcon>
+        <ListItemText primary="Dashboard" />
       </ListItem>
       <Divider />
       <ListItem button>
