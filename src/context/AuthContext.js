@@ -34,7 +34,7 @@ const AuthContext = ({ children }) => {
 };
 
 AuthContext.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 export { Context, AuthContext };

@@ -18,35 +18,33 @@ const style = theme => ({
 
 const Sidebar = ({ classes, open, drawer }) => {
   return (
-    <>
-      <nav className={classes.drawer}>
-        <Hidden smUp implementation="css">
-          <Drawer
-            variant="temporary"
-            anchor="left"
-            open={open}
-            onClose={() => drawer()}
-            classes={{ paper: classes.drawerPaper }}
-          >
-            <div className={classes.toolbar} />
-            <Divider />
-            <SidebarLink />
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            variant="permanent"
-            anchor="left"
-            open
-            classes={{ paper: classes.drawerPaper }}
-          >
-            <div className={classes.toolbar} />
-            <Divider />
-            <SidebarLink />
-          </Drawer>
-        </Hidden>
-      </nav>
-    </>
+    <nav className={classes.drawer}>
+      <Hidden smUp implementation="css">
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={open}
+          onClose={() => drawer()}
+          classes={{ paper: classes.drawerPaper }}
+        >
+          <div className={classes.toolbar} />
+          <Divider />
+          <SidebarLink drawer={drawer} />
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown implementation="css">
+        <Drawer
+          variant="permanent"
+          anchor="left"
+          open
+          classes={{ paper: classes.drawerPaper }}
+        >
+          <div className={classes.toolbar} />
+          <Divider />
+          <SidebarLink drawer={drawer} />
+        </Drawer>
+      </Hidden>
+    </nav>
   );
 };
 

@@ -22,7 +22,7 @@ Content.propTypes = {
     toolbar: PropTypes.string,
     content: PropTypes.string,
   }).isRequired,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 export default withStyles(style)(Content);

@@ -19,7 +19,7 @@
     "eject": "react-scripts eject",
     "server": "cd ./express-server && npm start",
     "dev": "concurrently \"cd ./express-server && npm start\" \"npm start\"",
-    "lint": "./node_modules/.bin/eslint src"
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": "react-app"

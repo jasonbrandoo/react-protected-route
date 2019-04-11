@@ -41,11 +41,11 @@ const style = theme => ({
   },
 });
 
-const Login = ({ classes }) => {
+const Login = ({ classes }, props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { dispatch } = useContext(Context);
-
+  console.log(props);
   const handleUsername = e => {
     setUsername(e.target.value);
   };
