@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import Sidebar from './Sidebar';
-import Appbar from './Appbar';
-import Router from '../routes/Router';
+import React, { useState } from "react";
+import { withStyles } from "@material-ui/core";
+import PropTypes from "prop-types";
+import Sidebar from "./Sidebar";
+import Appbar from "./Appbar";
+import Router from "../routes/Router";
 
 const style = () => ({
   root: {
-    display: 'flex',
-  },
+    display: "flex"
+  }
 });
 
 const Layout = ({ classes }) => {
@@ -28,8 +28,8 @@ const Layout = ({ classes }) => {
 
 Layout.propTypes = {
   classes: PropTypes.shape({
-    root: PropTypes.string,
-  }).isRequired,
+    root: PropTypes.string
+  }).isRequired
 };
 
 export default withStyles(style)(Layout);
