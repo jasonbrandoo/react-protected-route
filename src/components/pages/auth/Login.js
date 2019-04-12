@@ -15,8 +15,8 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   CHECK_PASSWORD,
-} from '../../reducers/authReducer';
-import { Context } from '../../context/AuthContext';
+} from '../../../reducers/authReducer';
+import { Context } from '../../../context/AuthContext';
 
 const style = theme => ({
   paper: {

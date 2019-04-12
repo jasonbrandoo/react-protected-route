@@ -15,8 +15,8 @@ import {
   DialogContentText,
   DialogActions,
 } from '@material-ui/core';
-import { REGISTER_SUCCESS, REGISTER_FAIL } from '../../reducers/authReducer';
-import { Context } from '../../context/AuthContext';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from '../../../reducers/authReducer';
+import { Context } from '../../../context/AuthContext';
 
 const style = theme => ({
   paper: {
