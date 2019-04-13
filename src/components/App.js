@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { AuthContext } from '../context/AuthContext';
-import Layout from './layout';
+import { Main } from './layout';
 
 const theme = createMuiTheme({
   palette: {
@@ -18,7 +18,7 @@ const App = () => (
   <AuthContext>
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <Layout />
+        <Main />
       </MuiThemeProvider>
     </BrowserRouter>
   </AuthContext>

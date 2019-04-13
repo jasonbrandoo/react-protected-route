@@ -13,7 +13,6 @@ const Context = React.createContext();
 const AuthContext = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
-    console.log(state);
     Axios.get('http://localhost:5000/user/auth', {
       headers: {
         Authorization: `Bearer ${state.token}`,

@@ -6,7 +6,7 @@ import Protected from '../pages/Protected';
 import Public from '../pages/Public';
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
-import Content from '../layout/Content';
+import Content from '../layout/Content/Content';
 
 const Router = () => (
   <Content>

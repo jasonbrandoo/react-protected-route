@@ -41,11 +41,10 @@ const style = theme => ({
   },
 });
 
-const Login = ({ classes }, props) => {
+const Login = ({ classes }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { dispatch } = useContext(Context);
-  console.log(props);
   const handleUsername = e => {
     setUsername(e.target.value);
   };
@@ -69,7 +68,6 @@ const Login = ({ classes }, props) => {
       .then(({ data }) => {
         dispatch({ type: LOGIN_SUCCESS, payload: data });
         window.location.href = '/';
-        console.log(data);
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAIL });

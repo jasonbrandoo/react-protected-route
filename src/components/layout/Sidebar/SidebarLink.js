@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  withStyles,
   List,
   ListItem,
   ListItemIcon,
@@ -9,19 +8,14 @@ import {
 } from '@material-ui/core';
 import { Dashboard, List as ListIcon } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const style = () => {
-  return {
-    fontSize: 50,
-  };
-};
-
-const SidebarLink = ({ classes, drawer }) => {
+const SidebarLink = ({ drawer }) => {
   const renderLink = props => <Link to="/login" {...props} />;
 
   return (
     <List component="nav">
-      <ListItem button component={renderLink} onClick={() => drawer()}>
+      <ListItem button component={renderLink} onClick={drawer || null}>
         <ListItemIcon>
           <Dashboard />
         </ListItemIcon>
@@ -38,4 +32,8 @@ const SidebarLink = ({ classes, drawer }) => {
   );
 };
 
-export default withStyles(style)(SidebarLink);
+SidebarLink.propTypes = {
+  drawer: PropTypes.func.isRequired,
+};
+
+export default SidebarLink;

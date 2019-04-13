@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import PropTypes from 'prop-types';
-import NavLink from './NavLink';
+import NavLink from './AppbarLink';
 
 const style = theme => ({
   appBar: {

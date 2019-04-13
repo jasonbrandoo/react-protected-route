@@ -9,7 +9,7 @@ const style = () => ({
   },
 });
 
-const NavLink = ({ classes }) => (
+const AppbarLink = ({ classes }) => (
   <React.Fragment>
     <Button to="/" component={RouterLink} color="inherit" variant="text">
       Protected-Route
@@ -34,10 +34,10 @@ const NavLink = ({ classes }) => (
   </React.Fragment>
 );
 
-NavLink.propTypes = {
+AppbarLink.propTypes = {
   classes: PropTypes.shape({
     left: PropTypes.string,
   }).isRequired,
 };
 
-export default withStyles(style)(NavLink);
+export default withStyles(style)(AppbarLink);

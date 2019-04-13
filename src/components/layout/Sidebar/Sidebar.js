@@ -41,7 +41,7 @@ const Sidebar = ({ classes, open, drawer }) => {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <SidebarLink drawer={drawer} />
+          <SidebarLink />
         </Drawer>
       </Hidden>
     </nav>
