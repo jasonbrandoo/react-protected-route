@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, Drawer, Hidden, Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import SidebarLink from './SidebarLink';
+import DrawerList from './DrawerList';
 
 const style = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -16,7 +16,7 @@ const style = theme => ({
   },
 });
 
-const Sidebar = ({ classes, open, drawer }) => {
+const Drawers = ({ classes, open, drawer }) => {
   return (
     <nav className={classes.drawer}>
       <Hidden smUp implementation="css">
@@ -29,7 +29,7 @@ const Sidebar = ({ classes, open, drawer }) => {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <SidebarLink drawer={drawer} />
+          <DrawerList drawer={drawer} />
         </Drawer>
       </Hidden>
       <Hidden xsDown implementation="css">
@@ -41,21 +41,25 @@ const Sidebar = ({ classes, open, drawer }) => {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <SidebarLink />
+          <DrawerList />
         </Drawer>
       </Hidden>
     </nav>
   );
 };
 
-Sidebar.propTypes = {
+Drawers.defaultProps = {
+  drawer: () => {},
+};
+
+Drawers.propTypes = {
   classes: PropTypes.shape({
     drawer: PropTypes.string,
     drawerPaper: PropTypes.string,
     toolbar: PropTypes.string,
   }).isRequired,
   open: PropTypes.bool.isRequired,
-  drawer: PropTypes.func.isRequired,
+  drawer: PropTypes.func,
 };
 
-export default withStyles(style)(Sidebar);
+export default withStyles(style)(Drawers);

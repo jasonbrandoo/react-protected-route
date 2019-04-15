@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Sidebar from './Sidebar/Sidebar';
+import Sidebar from './Drawer/Drawer';
 import Appbar from './Appbar/Appbar';
 import Router from '../routes/Router';
 
