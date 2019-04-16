@@ -5,22 +5,22 @@ import PropTypes from 'prop-types';
 
 const style = () => ({
   left: {
-    marginLeft: 'auto',
+    flexGrow: 1,
   },
 });
 
 const AppbarLink = ({ classes }) => (
   <React.Fragment>
-    <Button to="/" component={RouterLink} color="inherit" variant="text">
-      Protected-Route
-    </Button>
     <Button
-      className={classes.left}
-      to="/login"
+      to="/"
       component={RouterLink}
       color="inherit"
       variant="text"
+      className={classes.left}
     >
+      Protected-Route
+    </Button>
+    <Button to="/login" component={RouterLink} color="inherit" variant="text">
       Login
     </Button>
     <Button
