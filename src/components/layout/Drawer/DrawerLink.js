@@ -5,16 +5,13 @@ import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 
 const DrawerLink = ({ to, icon, primary, drawer }) => {
   const renderLink = linkProps => {
-    console.log(linkProps);
     return <Link to={to} {...linkProps} />;
   };
   return (
-    <li>
-      <ListItem button component={renderLink} onClick={drawer || null}>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={primary} />
-      </ListItem>
-    </li>
+    <ListItem button component={renderLink} onClick={drawer || null}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={primary} />
+    </ListItem>
   );
 };
 

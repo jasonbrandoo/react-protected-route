@@ -1,6 +1,11 @@
 import React from 'react';
 import { List, Divider } from '@material-ui/core';
-import { Dashboard, List as ListIcon, Info } from '@material-ui/icons';
+import {
+  Dashboard,
+  List as ListIcon,
+  Info,
+  Settings,
+} from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import DrawerLink from './DrawerLink';
 
@@ -18,6 +23,13 @@ const DrawerList = ({ drawer }) => {
         to="/item"
         icon={<ListIcon />}
         primary="Item"
+        drawer={drawer}
+      />
+      <Divider />
+      <DrawerLink
+        to="/setting"
+        icon={<Settings />}
+        primary="Setting"
         drawer={drawer}
       />
       <Divider />

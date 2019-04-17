@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Sidebar from './Drawer/Drawer';
+import Drawer from './Drawer/Drawer';
 import Appbar from './Appbar/Appbar';
 import Router from '../routes/Router';
 
@@ -20,7 +20,7 @@ const Layout = ({ classes }) => {
   return (
     <div className={classes.root}>
       <Appbar drawer={handleDrawerToggle} />
-      <Sidebar open={open} drawer={handleDrawerToggle} />
+      <Drawer open={open} drawer={handleDrawerToggle} />
       <Router />
     </div>
   );

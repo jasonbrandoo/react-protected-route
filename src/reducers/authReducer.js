@@ -55,7 +55,7 @@ export const reducer = (state, action) => {
           };
         }
       }
-      break;
+      return state;
     case LOGIN_SUCCESS:
       localStorage.setItem('token', action.payload.token);
       return {
@@ -79,5 +79,4 @@ export const reducer = (state, action) => {
     default:
       return state;
   }
-  return null;
 };
