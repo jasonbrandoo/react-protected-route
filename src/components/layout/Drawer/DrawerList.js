@@ -20,7 +20,7 @@ const DrawerList = ({ drawer }) => {
       />
       <Divider />
       <DrawerLink
-        to="/item"
+        to="/users"
         icon={<ListIcon />}
         primary="Item"
         drawer={drawer}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Drawer from './Drawer/Drawer';
-import Appbar from './Appbar/Appbar';
+import Drawer from './drawer/Drawer';
+import Appbar from './appbar/Appbar';
+import Content from './content/Content';
 import Router from '../routes/Router';
 
 const style = () => ({
@@ -12,16 +13,18 @@ const style = () => ({
 });
 
 const Layout = ({ classes }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const handleDrawerToggle = () => {
-    setOpen(prevState => !prevState);
+    setOpen(state => !state);
   };
 
   return (
     <div className={classes.root}>
       <Appbar drawer={handleDrawerToggle} />
       <Drawer open={open} drawer={handleDrawerToggle} />
-      <Router />
+      <Content open={open}>
+        <Router />
+      </Content>
     </div>
   );
 };

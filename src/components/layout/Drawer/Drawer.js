@@ -1,55 +1,55 @@
 import React from 'react';
-import { withStyles, Drawer, Hidden, Divider } from '@material-ui/core';
+import { withStyles, Drawer, Divider } from '@material-ui/core';
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import PropTypes from 'prop-types';
 import DrawerList from './DrawerList';
 
 const style = theme => ({
   toolbar: theme.mixins.toolbar,
   drawer: {
-    [theme.breakpoints.up('sm')]: {
-      flexShrink: 0,
-      width: 240,
-    },
+    flexShrink: 0,
+    width: 240,
+  },
+  drawerShift: {
+    margin: 0,
   },
   drawerPaper: {
     width: 240,
   },
 });
 
-const Drawers = ({ classes, open, drawer }) => {
+const Drawers = ({ classes, open }) => {
+  const matches = useMediaQuery('(min-width:600px)');
   return (
-    <nav className={classes.drawer}>
-      <Hidden smUp implementation="css">
-        <Drawer
-          variant="temporary"
-          anchor="left"
-          open={open}
-          onClose={() => drawer()}
-          classes={{ paper: classes.drawerPaper }}
-        >
-          <div className={classes.toolbar} />
-          <Divider />
-          <DrawerList drawer={drawer} />
-        </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
-        <Drawer
-          variant="permanent"
-          anchor="left"
-          open
-          classes={{ paper: classes.drawerPaper }}
-        >
-          <div className={classes.toolbar} />
-          <Divider />
-          <DrawerList />
-        </Drawer>
-      </Hidden>
-    </nav>
+    <React.Fragment>
+      {matches ? (
+        <nav className={classes.drawer}>
+          <Drawer
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{ paper: classes.drawerPaper }}
+          >
+            <div className={classes.toolbar} />
+            <Divider />
+            <DrawerList />
+          </Drawer>
+        </nav>
+      ) : (
+        <nav className={classes.drawerShift}>
+          <Drawer
+            variant="persistent"
+            anchor="left"
+            classes={{ paper: classes.drawerPaper }}
+          >
+            <div className={classes.toolbar} />
+            <Divider />
+            <DrawerList />
+          </Drawer>
+        </nav>
+      )}
+    </React.Fragment>
   );
-};
-
-Drawers.defaultProps = {
-  drawer: () => {},
 };
 
 Drawers.propTypes = {
@@ -59,7 +59,6 @@ Drawers.propTypes = {
     toolbar: PropTypes.string,
   }).isRequired,
   open: PropTypes.bool.isRequired,
-  drawer: PropTypes.func,
 };
 
 export default withStyles(style)(Drawers);
