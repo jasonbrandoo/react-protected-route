@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import MUIDataTable from 'mui-datatables';
-import { withStyles, CircularProgress } from '@material-ui/core';
+import {
+  SearchState,
+  IntegratedFiltering,
+  SortingState,
+  IntegratedSorting,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  SearchPanel,
+  Toolbar,
+} from '@devexpress/dx-react-grid-material-ui';
+import { withStyles, CircularProgress, Paper } from '@material-ui/core';
 
 const style = () => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
   },
   loading: {
-    height: '100vh',
-    margin: 'auto 0',
+    marginTop: '10rem',
+  },
+  table: {
+    width: '100%',
   },
 });
 
@@ -30,24 +43,48 @@ const Users = ({ classes }) => {
       });
   }, []);
 
-  const columns = ['id', 'name', 'username', 'email'];
-  const options = {
-    filterType: 'dropdown',
-    customToolbarSelect: (selectedRows, displayData, setSelectedRows) => {
-      console.log({ selectedRows, displayData, setSelectedRows });
+  const columns = [
+    {
+      name: 'id',
+      title: 'Id',
     },
-  };
-  const renderTable = (
-    <MUIDataTable data={User} columns={columns} options={options} />
+    {
+      name: 'name',
+      title: 'Name',
+    },
+    {
+      name: 'username',
+      title: 'Username',
+    },
+    {
+      name: 'email',
+      title: 'Email',
+    },
+  ];
+
+  console.log(User);
+  const DataTable = () => (
+    <Paper>
+      <Grid columns={columns} rows={User}>
+        <SearchState defaultValue="" />
+        <IntegratedFiltering />
+        <SortingState />
+        <IntegratedSorting />
+        <Table />
+        <TableHeaderRow showSortingControls />
+        <Toolbar />
+        <SearchPanel />
+      </Grid>
+    </Paper>
   );
 
   return (
     <React.Fragment>
       <div className={classes.root}>
         {Loading === false ? (
-          <CircularProgress className={classes.root} />
+          <CircularProgress className={classes.loading} />
         ) : (
-          renderTable
+          <DataTable />
         )}
       </div>
     </React.Fragment>

@@ -21,7 +21,7 @@ const style = theme => ({
 
 const Appbar = ({ classes, drawer }) => {
   return (
-    <AppBar position="absolute" className={classes.appBar}>
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <IconButton color="inherit" onClick={() => drawer()}>
           <Menu />
