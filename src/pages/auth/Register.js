@@ -7,7 +7,6 @@ import {
   withStyles,
   Paper,
   InputLabel,
-  Button,
   Typography,
   Dialog,
   DialogTitle,
@@ -15,8 +14,9 @@ import {
   DialogContentText,
   DialogActions,
 } from '@material-ui/core';
-import { REGISTER_SUCCESS, REGISTER_FAIL } from '../../../reducers/authReducer';
-import { Context } from '../../../context/AuthContext';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from '../../reducers/authReducer';
+import { Context } from '../../context/AuthContext';
+import ContainedButton from '../../components/Button/ContainedButton';
 
 const style = theme => ({
   paper: {
@@ -99,9 +99,7 @@ const Register = ({ classes }) => {
           <DialogContentText>Your password not match</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={handleClose}>
-            Close
-          </Button>
+          <ContainedButton color="primary" onClick={handleClose} text="Close" />
         </DialogActions>
       </Dialog>
       <Paper className={classes.paper}>
@@ -141,15 +139,14 @@ const Register = ({ classes }) => {
               onChange={e => handleConfirmPassword(e)}
             />
           </FormControl>
-          <Button
+          <ContainedButton
             type="submit"
             variant="contained"
             color="primary"
             className={classes.button}
             fullWidth
-          >
-            Sign Up
-          </Button>
+            text="Sign Up"
+          />
         </form>
       </Paper>
     </React.Fragment>

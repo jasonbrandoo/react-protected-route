@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Typography, withStyles, Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { Context } from '../../context/AuthContext';
+import { Context } from '../context/AuthContext';
 
 const style = () => ({
   root: {

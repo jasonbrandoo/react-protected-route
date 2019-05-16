@@ -5,7 +5,6 @@ import {
   FormControl,
   InputLabel,
   Input,
-  Button,
   Typography,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -15,8 +14,9 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   CHECK_PASSWORD,
-} from '../../../reducers/authReducer';
-import { Context } from '../../../context/AuthContext';
+} from '../../reducers/authReducer';
+import { Context } from '../../context/AuthContext';
+import ContainedButton from '../../components/Button/ContainedButton';
 
 const style = theme => ({
   paper: {
@@ -95,15 +95,14 @@ const Login = ({ classes }) => {
             onChange={e => handlePassword(e)}
           />
         </FormControl>
-        <Button
+        <ContainedButton
           type="submit"
           variant="contained"
           color="primary"
           className={classes.button}
           fullWidth
-        >
-          Login
-        </Button>
+          text="Login"
+        />
       </form>
     </Paper>
   );
