@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import PublicRoute from './PublicRoute';
-import ProtectedRoute from './ProtectedRoute';
-import Protected from '../pages/Protected';
-import Public from '../pages/Public';
-import Login from '../pages/auth/Login';
-import Register from '../pages/auth/Register';
-import Users from '../pages/users/Users';
+import PublicRoute from './Public';
+import ProtectedRoute from './Protected';
+import Protected from '../../pages/Protected';
+import Public from '../../pages/Public';
+import Login from '../../pages/auth/Login';
+import Register from '../../pages/auth/Register';
+import Users from '../../pages/users/Users';
 
 const Router = () => (
   <Switch>

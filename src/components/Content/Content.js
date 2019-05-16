@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 const style = theme => ({
@@ -8,19 +7,11 @@ const style = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    marginLeft: -240,
-  },
-  contentShift: {
-    marginLeft: 0,
   },
 });
 
-const Content = ({ children, classes, open }) => (
-  <div
-    className={classNames(classes.content, {
-      [classes.contentShift]: open,
-    })}
-  >
+const Content = ({ children, classes }) => (
+  <div className={classes.content}>
     <div className={classes.toolbar} />
     {children}
   </div>
@@ -31,8 +22,7 @@ Content.propTypes = {
     toolbar: PropTypes.string,
     content: PropTypes.string,
   }).isRequired,
-  children: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
+  children: PropTypes.array.isRequired,
 };
 
 export default withStyles(style)(Content);

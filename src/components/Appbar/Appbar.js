@@ -23,7 +23,7 @@ const Appbar = ({ classes, drawer }) => {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <IconButton color="inherit" onClick={() => drawer()}>
+        <IconButton color="inherit" onClick={drawer}>
           <Menu />
         </IconButton>
         <AppbarLink />

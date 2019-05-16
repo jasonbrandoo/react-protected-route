@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles, Drawer, Divider } from '@material-ui/core';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import DrawerList from './DrawerList';
 
 const style = theme => ({
@@ -11,7 +12,7 @@ const style = theme => ({
     width: 240,
   },
   drawerShift: {
-    margin: 0,
+    width: 0,
   },
   drawerPaper: {
     width: 240,
@@ -23,30 +24,33 @@ const Drawers = ({ classes, open }) => {
   return (
     <React.Fragment>
       {matches ? (
-        <nav className={classes.drawer}>
-          <Drawer
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{ paper: classes.drawerPaper }}
-          >
-            <div className={classes.toolbar} />
-            <Divider />
-            <DrawerList />
-          </Drawer>
-        </nav>
+        <Drawer
+          className={classNames(classes.drawer, {
+            [classes.drawerShift]: !open,
+          })}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{ paper: classes.drawerPaper }}
+        >
+          <div className={classes.toolbar} />
+          <Divider />
+          <DrawerList />
+        </Drawer>
       ) : (
-        <nav className={classes.drawerShift}>
-          <Drawer
-            variant="persistent"
-            anchor="left"
-            classes={{ paper: classes.drawerPaper }}
-          >
-            <div className={classes.toolbar} />
-            <Divider />
-            <DrawerList />
-          </Drawer>
-        </nav>
+        <Drawer
+          className={classNames(classes.drawer, {
+            [classes.drawerShift]: open,
+          })}
+          variant="persistent"
+          anchor="left"
+          open={!open}
+          classes={{ paper: classes.drawerPaper }}
+        >
+          <div className={classes.toolbar} />
+          <Divider />
+          <DrawerList />
+        </Drawer>
       )}
     </React.Fragment>
   );

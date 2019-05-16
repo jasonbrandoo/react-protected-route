@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
 import Axios from 'axios';
-import PropTypes from 'prop-types';
 import {
   reducer,
   initialState,
@@ -10,7 +9,7 @@ import {
 
 const Context = React.createContext();
 
-const AuthContext = ({ children }) => {
+const AuthContext = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     Axios.get('http://localhost:5000/user/auth', {
@@ -27,13 +26,7 @@ const AuthContext = ({ children }) => {
       });
   }, []);
 
-  return (
-    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
-  );
-};
-
-AuthContext.propTypes = {
-  children: PropTypes.object.isRequired,
+  return <Context.Provider value={{ state, dispatch }} {...props} />;
 };
 
 export { Context, AuthContext };

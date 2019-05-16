@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Drawer from './drawer/Drawer';
-import Appbar from './appbar/Appbar';
-import Content from './content/Content';
-import Router from '../routes/Router';
+import Drawer from '../components/Drawer/Drawer';
+import Appbar from '../components/Appbar/Appbar';
+import Content from '../components/Content/Content';
+import Router from '../components/Routes/Router';
 
 const style = () => ({
   root: {
@@ -12,7 +12,7 @@ const style = () => ({
   },
 });
 
-const Layout = ({ classes }) => {
+const Dashboard = ({ classes }) => {
   const [open, setOpen] = useState(true);
   const handleDrawerToggle = () => {
     setOpen(state => !state);
@@ -22,17 +22,17 @@ const Layout = ({ classes }) => {
     <div className={classes.root}>
       <Appbar drawer={handleDrawerToggle} />
       <Drawer open={open} drawer={handleDrawerToggle} />
-      <Content open={open}>
+      <Content>
         <Router />
       </Content>
     </div>
   );
 };
 
-Layout.propTypes = {
+Dashboard.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string,
   }).isRequired,
 };
 
-export default withStyles(style)(Layout);
+export default withStyles(style)(Dashboard);
