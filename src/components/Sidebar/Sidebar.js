@@ -3,7 +3,7 @@ import { withStyles, Drawer, Divider } from '@material-ui/core';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DrawerList from './DrawerList';
+import SidebarList from './SidebarList';
 
 const style = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -19,7 +19,7 @@ const style = theme => ({
   },
 });
 
-const Drawers = ({ classes, open }) => {
+const Sidebar = ({ classes, open, drawer }) => {
   const matches = useMediaQuery('(min-width:600px)');
   return (
     <React.Fragment>
@@ -35,7 +35,7 @@ const Drawers = ({ classes, open }) => {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <DrawerList />
+          <SidebarList />
         </Drawer>
       ) : (
         <Drawer
@@ -49,20 +49,25 @@ const Drawers = ({ classes, open }) => {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <DrawerList />
+          <SidebarList drawer={drawer} />
         </Drawer>
       )}
     </React.Fragment>
   );
 };
 
-Drawers.propTypes = {
+Sidebar.defaultProps = {
+  drawer: () => {},
+};
+
+Sidebar.propTypes = {
   classes: PropTypes.shape({
     drawer: PropTypes.string,
     drawerPaper: PropTypes.string,
     toolbar: PropTypes.string,
   }).isRequired,
   open: PropTypes.bool.isRequired,
+  drawer: PropTypes.func,
 };
 
-export default withStyles(style)(Drawers);
+export default withStyles(style)(Sidebar);

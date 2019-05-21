@@ -7,43 +7,48 @@ import {
   Settings,
 } from '@material-ui/icons';
 import PropTypes from 'prop-types';
-import DrawerLink from './DrawerLink';
+import SidebarLink from './SidebarLink';
 
-const DrawerList = ({ drawer }) => {
+const SidebarList = ({ drawer }) => {
   return (
     <List component="nav">
-      <DrawerLink
+      <SidebarLink
         to="/dashboard"
         icon={<Dashboard />}
         primary="Dashboard"
         drawer={drawer}
       />
       <Divider />
-      <DrawerLink
+      <SidebarLink
         to="/users"
         icon={<ListIcon />}
         primary="Item"
         drawer={drawer}
       />
       <Divider />
-      <DrawerLink
+      <SidebarLink
         to="/setting"
         icon={<Settings />}
         primary="Setting"
         drawer={drawer}
       />
       <Divider />
-      <DrawerLink to="/about" icon={<Info />} primary="About" drawer={drawer} />
+      <SidebarLink
+        to="/about"
+        icon={<Info />}
+        primary="About"
+        drawer={drawer}
+      />
     </List>
   );
 };
 
-DrawerList.defaultProps = {
+SidebarList.defaultProps = {
   drawer: () => {},
 };
 
-DrawerList.propTypes = {
+SidebarList.propTypes = {
   drawer: PropTypes.func,
 };
 
-export default DrawerList;
+export default SidebarList;

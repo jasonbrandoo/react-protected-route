@@ -19,7 +19,7 @@ const style = () => ({
   },
 });
 
-const AppbarLink = ({ classes }) => {
+const NavbarLink = ({ classes }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = event => {
@@ -74,10 +74,10 @@ const AppbarLink = ({ classes }) => {
   );
 };
 
-AppbarLink.propTypes = {
+NavbarLink.propTypes = {
   classes: PropTypes.shape({
     left: PropTypes.string,
   }).isRequired,
 };
 
-export default withStyles(style)(AppbarLink);
+export default withStyles(style)(NavbarLink);

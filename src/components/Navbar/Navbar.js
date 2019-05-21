@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import PropTypes from 'prop-types';
-import AppbarLink from './AppbarLink';
+import NavbarLink from './NavbarLink';
 
 const style = theme => ({
   appBar: {
@@ -19,20 +19,20 @@ const style = theme => ({
   },
 });
 
-const Appbar = ({ classes, drawer }) => {
+const Navbar = ({ classes, drawer }) => {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <IconButton color="inherit" onClick={drawer}>
           <Menu />
         </IconButton>
-        <AppbarLink />
+        <NavbarLink />
       </Toolbar>
     </AppBar>
   );
 };
 
-Appbar.propTypes = {
+Navbar.propTypes = {
   classes: PropTypes.shape({
     appBar: PropTypes.string,
     menuButton: PropTypes.string,
@@ -40,4 +40,4 @@ Appbar.propTypes = {
   drawer: PropTypes.func.isRequired,
 };
 
-export default withStyles(style)(Appbar);
+export default withStyles(style)(Navbar);

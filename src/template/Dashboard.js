@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Drawer from '../components/Drawer/Drawer';
-import Appbar from '../components/Appbar/Appbar';
+import Sidebar from '../components/Sidebar/Sidebar';
+import Navbar from '../components/Navbar/Navbar';
 import Content from '../components/Content/Content';
 import Router from '../components/Routes/Router';
 
@@ -20,8 +20,8 @@ const Dashboard = ({ classes }) => {
 
   return (
     <div className={classes.root}>
-      <Appbar drawer={handleDrawerToggle} />
-      <Drawer open={open} drawer={handleDrawerToggle} />
+      <Navbar drawer={handleDrawerToggle} />
+      <Sidebar open={open} drawer={handleDrawerToggle} />
       <Content>
         <Router />
       </Content>
