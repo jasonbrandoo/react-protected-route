@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
+import { Button as ContainedButton } from '@material-ui/core';
 
-const ContainedButton = ({
-  className,
-  type,
-  color,
-  text,
-  variant,
-  ...props
-}) => {
+const Button = ({ className, type, color, text, variant, ...props }) => {
   return (
-    <Button
+    <ContainedButton
       className={className}
       type={type}
       color={color}
@@ -19,11 +12,11 @@ const ContainedButton = ({
       {...props}
     >
       {text}
-    </Button>
+    </ContainedButton>
   );
 };
 
-ContainedButton.defaultProps = {
+Button.defaultProps = {
   type: 'button',
   color: 'primary',
   text: 'text',
@@ -31,7 +24,7 @@ ContainedButton.defaultProps = {
   variant: 'contained',
 };
 
-ContainedButton.propTypes = {
+Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   color: PropTypes.string,
@@ -39,4 +32,4 @@ ContainedButton.propTypes = {
   variant: PropTypes.string,
 };
 
-export default ContainedButton;
+export default Button;

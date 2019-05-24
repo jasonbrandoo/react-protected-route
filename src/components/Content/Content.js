@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import Routes from '../Routes/Router';
 
 const style = theme => ({
   toolbar: theme.mixins.toolbar,
@@ -10,10 +11,10 @@ const style = theme => ({
   },
 });
 
-const Content = ({ children, classes }) => (
+const Content = ({ classes }) => (
   <div className={classes.content}>
     <div className={classes.toolbar} />
-    {children}
+    <Routes />
   </div>
 );
 
@@ -22,7 +23,6 @@ Content.propTypes = {
     toolbar: PropTypes.string,
     content: PropTypes.string,
   }).isRequired,
-  children: PropTypes.object.isRequired,
 };
 
 export default withStyles(style)(Content);

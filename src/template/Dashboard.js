@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import Body from '../components/Body/Body';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Navbar from '../components/Navbar/Navbar';
 import Content from '../components/Content/Content';
-import Router from '../components/Routes/Router';
 
 const style = () => ({
   root: {
@@ -20,11 +20,11 @@ const Dashboard = ({ classes }) => {
 
   return (
     <div className={classes.root}>
-      <Navbar drawer={handleDrawerToggle} />
-      <Sidebar open={open} drawer={handleDrawerToggle} />
-      <Content>
-        <Router />
-      </Content>
+      <Body
+        navbar={<Navbar drawer={handleDrawerToggle} />}
+        sidebar={<Sidebar open={open} drawer={handleDrawerToggle} />}
+        content={<Content />}
+      />
     </div>
   );
 };

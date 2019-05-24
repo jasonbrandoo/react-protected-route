@@ -16,7 +16,7 @@ import {
   CHECK_PASSWORD,
 } from '../../reducers/authReducer';
 import { Context } from '../../context/AuthContext';
-import ContainedButton from '../../components/Button/ContainedButton';
+import ContainedButton from '../../components/Button/Button';
 
 const style = theme => ({
   paper: {

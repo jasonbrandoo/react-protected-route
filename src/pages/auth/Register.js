@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { REGISTER_SUCCESS, REGISTER_FAIL } from '../../reducers/authReducer';
 import { Context } from '../../context/AuthContext';
-import ContainedButton from '../../components/Button/ContainedButton';
+import ContainedButton from '../../components/Button/Button';
 
 const style = theme => ({
   paper: {
